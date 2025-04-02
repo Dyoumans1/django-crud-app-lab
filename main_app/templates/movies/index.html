@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
+<div class="full-width-banner">
   <h1>All Movies</h1>
 </div>
 
@@ -18,7 +18,11 @@
           <h2>{{ movie.name }}</h2>
         </a>
       <div class="movie-img">
-          <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
+        {% if movie.poster_image %}
+        <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
+        {% else %}
+        <img src="{% static 'images/default_poster.jpg' %}" alt="Movie poster" />
+        {% endif %}
       </div>
       <div class="movie-details">
         <p><strong>Year:</strong> {{ movie.year }}</p>

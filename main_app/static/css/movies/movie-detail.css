@@ -5,14 +5,14 @@
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-  }
+}
 
-  .movie-img {
+.movie-img {
     flex-shrink: 0;
     text-align: center;
-  }
-  
-  .movie-img img {
+}
+
+.movie-img img {
     width: 100%;
     max-width: 300px;
     height: 450px;
@@ -20,31 +20,72 @@
     border-radius: 5px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #ddd;
-  }
-  
-  .movie-details {
+}
+
+.movie-details {
     background-color: #f1f2f6;
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ddd;
     flex-grow: 1;
-  }
-  
-  .movie-details h1 {
+}
+
+.movie-details h1 {
     color: #4b6584;
     margin-top: 0;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
-  }
-  
-  .movie-details h2, .movie-details h3, .movie-details h4 {
+}
+
+.movie-details h2, .movie-details h3, .movie-details h4 {
     color: #555;
     margin: 10px 0;
-  }
-  
-  .movie-details p {
+}
+
+.movie-details p {
     color: #555;
     line-height: 1.6;
     margin-top: 15px;
-  }
+}
+
+.movie-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn.warn {
+    background-color: #f0932b;
+    color: white;
+}
+
+.btn.warn:hover {
+    background-color: #e58e26;
+}
+
+.btn.danger {
+    background-color: #eb4d4b;
+    color: white;
+}
+
+.btn.danger:hover {
+    background-color: #d44340;
+}

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Movie
 
@@ -17,3 +17,15 @@ def movie_index(request):
 def movie_detail(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     return render(request, 'movies/detail.html', { 'movie': movie })
+
+class MovieCreate(CreateView):
+    model = Movie
+    fields = '__all__'
+
+class MovieUpdate(UpdateView):
+    model = Movie
+    fields = [ 'name', 'director', 'genre', 'description', 'year', 'poster_image']
+
+class MovieDelete(DeleteView):
+    model = Movie
+    success_url = '/movies/'

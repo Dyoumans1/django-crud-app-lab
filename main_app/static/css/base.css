@@ -9,7 +9,7 @@ html {
 :root {
   font-size: 62.5%;
   --nav-bg: rgba(104, 197, 248, 0.7);
-  --borders: rgb(36, 116, 248) solid 2px;
+  /* --borders: rgb(36, 116, 248) solid 2px; */
   --text-color: rgb(17, 20, 17);
   --link-hover-color: rgb(16, 56, 158);
   --font-xl: 2.4rem;

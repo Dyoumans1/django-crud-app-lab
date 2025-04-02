@@ -7,9 +7,9 @@
 <section class="movie-container">
   <div class="movie-img">
     {% if movie.poster_image %}
-      <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
+        <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
     {% else %}
-      <img src="{% static 'images/movie-poster-placeholder.jpg' %}" alt="Movie poster" />
+        <img src="{% static 'images/default_poster.jpg' %}" alt="Movie poster" />
     {% endif %}
   </div>
   <div class="movie-details">
@@ -19,5 +19,11 @@
     <h4>Released in: {{ movie.year }}</h4>
     <p>{{ movie.description }}</p>
   </div>
+
+  <div class="movie-actions">
+    <a href="{% url 'movie-update' movie.id %}" class="btn warn">Edit</a>
+    <a href="{% url 'movie-delete' movie.id %}" class="btn danger">Delete</a>
+  </div>
+
 </section>
 {% endblock %}
