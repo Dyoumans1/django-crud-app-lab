@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/movies/movie-detail.css' %}" />
+{% endblock %}
+{% block content %}
+<section class="movie-container">
+  <div class="movie-img">
+    {% if movie.poster_image %}
+      <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
+    {% else %}
+      <img src="{% static 'images/movie-poster-placeholder.jpg' %}" alt="Movie poster" />
+    {% endif %}
+  </div>
+  <div class="movie-details">
+    <h1>{{ movie.name }}</h1>
+    <h2>Directed by: {{ movie.director }}</h2>
+    <h3>Genre: {{ movie.genre }}</h3>
+    <h4>Released in: {{ movie.year }}</h4>
+    <p>{{ movie.description }}</p>
+  </div>
+</section>
+{% endblock %}
