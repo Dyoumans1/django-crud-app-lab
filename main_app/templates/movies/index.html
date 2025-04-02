@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/movies.css' %}">
+<link rel="stylesheet" href="{% static 'css/movies/movie-index.css' %}">
 <title>All Movies | Movie Collector</title>
 {% endblock %}
 
@@ -18,11 +18,7 @@
           <h2>{{ movie.name }}</h2>
         </a>
       <div class="movie-img">
-        {% if movie.poster_image %}
           <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
-        {% else %}
-          <img src="{% static 'images/movie-poster-placeholder.jpg' %}" alt="Movie poster" />
-        {% endif %}
       </div>
       <div class="movie-details">
         <p><strong>Year:</strong> {{ movie.year }}</p>
