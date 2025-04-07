@@ -89,3 +89,108 @@
 .btn.danger:hover {
     background-color: #d44340;
 }
+
+.btn.submit {
+    background-color: #6ab04c;
+    color: white;
+}
+
+.btn.submit:hover {
+    background-color: #5a9641;
+}
+
+.reviews-actors-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.reviews, .actors {
+    flex: 1;
+    background-color: #f1f2f6;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.subsection-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.subsection-title h2 {
+    color: #4b6584;
+    margin: 0;
+}
+
+.subsection-title img {
+    height: 30px;
+    width: auto;
+}
+
+.subsection-content {
+    margin-bottom: 20px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Actor styling */
+.actor-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.actor-photo img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+.no-actors, .subsection-content p {
+    color: #666;
+    font-style: italic;
+}
+
+.rating {
+    background-color: #e3f2fd;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    display: inline-block;
+}
+
+.rating h3 {
+    margin: 0;
+    color: #2980b9;
+}

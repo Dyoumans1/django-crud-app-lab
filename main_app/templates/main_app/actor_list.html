@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/actors/actor-index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All Actors</h1>
+</section>
+
+<section class="card-container">
+  {% for actor in actor_list %}
+    <div class="card">
+      <div class="card-bg"></div>
+      <a href="{% url 'actor-detail' actor.id %}">
+        <div class="card-content">
+          <h2>{{ actor.name }}</h2>
+          {% if actor.photo %}
+            <img src="{{ actor.photo.url }}" alt="{{ actor.name }}" class="actor-thumbnail">
+          {% else %}
+            <div class="no-photo">No photo</div>
+          {% endif %}
+          <p>Born: {{ actor.date_of_birth|date:"M d, Y" }}</p>
+          <p>Movies: {{ actor.movie_set.count }}</p>
+        </div>
+      </a>
+    </div>
+  {% empty %}
+    <div class="no-actors">
+      <h3>No actors added yet</h3>
+      <p>Click the "Add an Actor" button below to get started!</p>
+    </div>
+  {% endfor %}
+</section>
+
+<section class="button-section">
+  <a href="{% url 'actor-create' %}" class="btn submit">Add an Actor</a>
+</section>
+
+{% endblock %}

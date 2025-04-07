@@ -1,15 +1,27 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} 
+{% load static %} 
 {% block head %}
+<!-- New MCDatepicker CSS -->
+<link 
+  href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" 
+  rel="stylesheet" 
+/>
+<link rel="stylesheet" href="{% static 'css/mcdp.css' %}">
+<!-- MCDatepicker JS -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"
+>
+</script>
+<script defer src="{% static 'js/movie-detail.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/movies/movie-detail.css' %}" />
-{% endblock %}
+{% endblock %} 
 {% block content %}
 <section class="movie-container">
   <div class="movie-img">
     {% if movie.poster_image %}
-        <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
+      <img src="{{ movie.poster_image.url }}" alt="{{ movie.name }} poster" />
     {% else %}
-        <img src="{% static 'images/default_poster.jpg' %}" alt="Movie poster" />
+      <img src="{% static 'images/default_poster.jpg' %}" alt="Default movie poster" />
     {% endif %}
   </div>
   <div class="movie-details">
@@ -18,12 +30,106 @@
     <h3>Genre: {{ movie.genre }}</h3>
     <h4>Released in: {{ movie.year }}</h4>
     <p>{{ movie.description }}</p>
-  </div>
 
-  <div class="movie-actions">
-    <a href="{% url 'movie-update' movie.id %}" class="btn warn">Edit</a>
-    <a href="{% url 'movie-delete' movie.id %}" class="btn danger">Delete</a>
-  </div>
+    {% if movie.average_rating %}
+      <div class="rating">
+        <h3>Average Rating: {{ movie.average_rating|floatformat:1 }} / 5</h3>
+      </div>
+    {% endif %}
 
+    <div class="movie-actions">
+      <a href="{% url 'movie-update' movie.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'movie-delete' movie.id %}" class="btn danger">Delete</a>
+    </div>
+  </div>
 </section>
+<div class="reviews-actors-container">
+  <section class="reviews">
+    <div class="subsection-title">
+      <h2>Reviews</h2>
+    </div>
+    <h3>Add a Review</h3>
+    <form
+      action="{% url 'add-review' movie.id %}"
+      method="post"
+      class="subsection-content"
+    >
+      {% csrf_token %}
+      {{ review_form.as_p }}
+      <button type="submit" class="btn submit">Add Review</button>
+    </form>
+    <h3>Recent Reviews</h3>
+    {% if movie.review_set.all.count %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for review in movie.review_set.all %}
+          <tr>
+            <td>{{review.date}}</td>
+            <td>{{review.get_rating_display}}</td>
+            <td>{{review.comment}}</td>
+            <td>{{review.user.username}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="subsection-content">
+        <p>⚠️ {{movie.name}} has no reviews yet!</p>
+      </div>
+    {% endif %}
+  </section>
+  <section class="actors">
+    <div class="subsection-title">
+      <h2>Cast</h2>
+    </div>
+    <h3>{{ movie.name }}'s Cast</h3>
+    <div class="subsection-content">
+      {% if movie.actors.count %} 
+        {% for actor in movie.actors.all %}
+          <div class="actor-container">
+            {% if actor.photo %}
+              <div class="actor-photo">
+                <img src="{{ actor.photo.url }}" alt="{{ actor.name }}" />
+              </div>
+            {% endif %}
+            <a href="{% url 'actor-detail' actor.id %}">
+              <p>{{ actor.name }}</p>
+            </a>
+          </div>
+          <form action="{% url 'remove-actor' movie.id actor.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove Actor</button>
+          </form>
+        {% endfor %} 
+      {% else %}
+        <p class="no-actors">{{movie.name}} doesn't have any actors listed!</p>
+      {% endif %}
+    </div>
+    <h3>Available Actors</h3>
+    <div class="subsection-content">
+      {% for actor in actors %}
+        <div class="actor-container">
+          {% if actor.photo %}
+            <div class="actor-photo">
+              <img src="{{ actor.photo.url }}" alt="{{ actor.name }}" />
+            </div>
+          {% endif %}
+          <p>{{ actor.name }}</p>
+          <form action="{% url 'associate-actor' movie.id actor.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn submit">Add to Cast</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
 {% endblock %}
